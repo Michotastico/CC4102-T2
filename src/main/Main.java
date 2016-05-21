@@ -14,5 +14,7 @@ public class Main {
         String S = "alabar a la alabarda";
         char[] sigma = {' ', 'a', 'b', 'd', 'l', 'r'};
         Node node = new Node(S, sigma);
+        int rank = node.rank(' ',12);
+        System.out.println(rank);
     }
 }
