@@ -1,6 +1,6 @@
 package structures;
 
-import java.lang.reflect.Array;
+
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -85,5 +85,64 @@ public class Node {
         else
             return this.left.rank(value, counter);
 
+    }
+
+    public int range(int x, int y, int i, int j){
+        char[] rangeDictionary = Arrays.copyOfRange(this.dictionary, x - 1, y);
+        return range(rangeDictionary, i - 1 , j);
+    }
+
+    private int range(char[] rangeDictionary, int i, int j){
+        int counter = 0;
+
+        for(char c: this.dictionary)
+            if(arrayContains(rangeDictionary, c))
+                counter++;
+
+        if(counter == 0)
+            return 0;
+
+        else if(counter == this.dictionary.length){
+            if(j < 0)
+                return 0;
+            if(i < 0)
+                i = 0;
+            return j - i;
+        }
+        else{
+            int rightHead = 0;
+
+            for(int k = 0; k < i; k++)
+                if(this.bitmap[k])
+                    rightHead++;
+
+            int leftHead = i - rightHead;
+
+            int rightTail = rightHead;
+
+            for(int k = i; k < j; k++)
+                if(this.bitmap[k])
+                    rightTail++;
+
+            int leftTail = j - rightTail;
+
+            int iLeft = i - rightHead;
+            int jLeft = j - rightTail;
+
+            int iRight = i - leftHead;
+            int jRight = j - leftTail;
+
+            int left = this.left.range(rangeDictionary, iLeft, jLeft);
+            int right = this.right.range(rangeDictionary, iRight, jRight);
+
+            return left + right;
+        }
+    }
+
+    private boolean arrayContains(char[] array, char value){
+        for(char c: array)
+            if(value == c)
+                return true;
+        return false;
     }
 }
