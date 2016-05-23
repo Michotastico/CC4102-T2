@@ -1,6 +1,5 @@
 package structures;
 
-
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -140,9 +139,9 @@ public class Node {
     }
 
     private boolean arrayContains(char[] array, char value){
-        for(char c: array)
-            if(value == c)
-                return true;
+        int search = Arrays.binarySearch(array, value);
+        if(search >= 0)
+            return true;
         return false;
     }
 }

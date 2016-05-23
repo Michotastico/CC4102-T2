@@ -1,7 +1,6 @@
 package main;
 
 import experiments.Tests;
-import structures.Node;
 
 /**
  * Class Main
