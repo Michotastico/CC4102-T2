@@ -1,6 +1,6 @@
 package experiments;
 
-import structures.Node;
+import structures.WaveletTree;
 
 import java.util.Random;
 
@@ -25,7 +25,7 @@ public class Tests {
 
             char[] sigma = makeSigma(sigmaSize);
             String S = makeSymbol(sigma);
-            Node waveletTree = new Node(S, sigma);
+            WaveletTree waveletTree = new WaveletTree(S, sigma);
 
             Random random = new Random(42);
 
@@ -35,7 +35,7 @@ public class Tests {
         }
     }
 
-    private void rankTest(Node node, char[] sigma, Random random){
+    private void rankTest(WaveletTree waveletTree, char[] sigma, Random random){
 
         System.out.println("Rank Test with sigma length "+sigma.length);
 
@@ -48,7 +48,7 @@ public class Tests {
             int deep = random.nextInt(symbolsLength) + 1;
 
             start = System.nanoTime();
-            node.rank(c, deep);
+            waveletTree.rank(c, deep);
             end = System.nanoTime();
             time += (end - start);
         }
@@ -56,7 +56,7 @@ public class Tests {
         System.out.println("Average (nanoseconds) : "+ average);
     }
 
-    private void rangeTest(Node node, char[] sigma, Random random){
+    private void rangeTest(WaveletTree waveletTree, char[] sigma, Random random){
 
         System.out.println("Range Test with sigma length "+sigma.length);
 
@@ -86,7 +86,7 @@ public class Tests {
             }
 
             start = System.nanoTime();
-            node.range(x, y, i, j);
+            waveletTree.range(x, y, i, j);
             end = System.nanoTime();
             time += (end - start);
         }

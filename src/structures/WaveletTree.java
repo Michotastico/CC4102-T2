@@ -4,23 +4,23 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 /**
- * Class Node
+ * Class WaveletTree
  *
  * @author Michel Llorens <mllorens@dcc.uchile.cl>
  * @version 1.0, 19-05-2016
  */
-public class Node {
+public class WaveletTree {
 
     private char[] dictionary;
     private HashMap<Character, Boolean> translate;
     private boolean[] bitmap;
 
-    private Node left;
-    private Node right;
+    private WaveletTree left;
+    private WaveletTree right;
 
     private boolean has_sons = false;
 
-    public Node(String S, char[] sigma){
+    public WaveletTree(String S, char[] sigma){
         int sLength = S.length();
         int sigmaLength = sigma.length;
 
@@ -60,8 +60,8 @@ public class Node {
         char[] leftSigma = Arrays.copyOfRange(this.dictionary, 0, middlePoint);
         char[] rightSigma = Arrays.copyOfRange(this.dictionary, middlePoint, this.dictionary.length);
 
-        this.left = new Node(sLeft.toString(), leftSigma);
-        this.right = new Node(sRight.toString(), rightSigma);
+        this.left = new WaveletTree(sLeft.toString(), leftSigma);
+        this.right = new WaveletTree(sRight.toString(), rightSigma);
 
     }
 
@@ -140,8 +140,6 @@ public class Node {
 
     private boolean arrayContains(char[] array, char value){
         int search = Arrays.binarySearch(array, value);
-        if(search >= 0)
-            return true;
-        return false;
+        return search >= 0;
     }
 }
